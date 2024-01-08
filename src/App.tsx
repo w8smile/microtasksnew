@@ -1,6 +1,7 @@
 import './App.css'
 import React, {useState} from "react";
 
+type FilterType = "all" | "dollar" | "ruble";
 
 function App() {
     const [money, setMoney] = useState([
@@ -13,8 +14,7 @@ function App() {
         {banknote: "dollar", nominal: 50, number: "j123456789"},
         {banknote: "ruble", nominal: 50, number: "h123456789"}
     ])
-
-    let [filter, setFilter] = useState('all')
+    let [filter, setFilter] = useState<FilterType>('all')
 
     let currentMoney = money;
     if (filter==='dollar') {
@@ -24,27 +24,27 @@ function App() {
         currentMoney=money.filter((f)=>f.banknote==='ruble')
     }
 
-
-
-
-    const OnClickFilterHandler = (fn: string) => {
-        setFilter(fn)
+    const OnClickHandler = (filterValue: FilterType) => {
+        setFilter(filterValue)
     }
+
 
     return (
         <div className='App'>
-            {currentMoney.map((el) => {
-                return (
-                    <li>
-                        <span>{el.banknote}</span>
-                        <span> {el.nominal}</span>
-                        <span> {el.number}</span>
-                    </li>
-                )
-            })}
-            <button onClick={() => OnClickFilterHandler('all')}>all</button>
-            <button onClick={() => OnClickFilterHandler('ruble')}>ruble</button>
-            <button onClick={() => OnClickFilterHandler('dollar')}>dollar</button>
+                {currentMoney.map((el, index)=> {
+                    return(
+                        <li key={index}>
+                            <span>{el.banknote}</span>
+                            <span> {el.nominal}</span>
+                            <span> {el.number}</span>
+                        </li>
+                    )
+                })}
+            <button onClick={()=> OnClickHandler ('all')}>ALL</button>
+            <button onClick={()=> OnClickHandler ('dollar')}>DOLLAR</button>
+            <button onClick={()=> OnClickHandler ('ruble')}>RUBLE</button>
+
+
         </div>
 
     );
