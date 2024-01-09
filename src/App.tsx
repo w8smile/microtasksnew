@@ -1,6 +1,8 @@
 import './App.css'
 import React, {useState} from "react";
 import {FullInput} from "./components/FullInput";
+import Input from "./components/Input";
+import ButtonInput from "./components/ButtonInput";
 
 function App() {
     const [message, setMessage] = useState([
@@ -11,18 +13,34 @@ function App() {
             {message: 'message5'}
         ]
     )
+    let [title,setTitle]=useState('');
+
+
     const addMessage = (title: string) => {
         let newMessage = {message: title}
         setMessage([newMessage,...message])
 
     }
 
+    const buttonHandler = () => {
+        addMessage(title)
+        setTitle('')
+    }
+
+
+
+
 
 
     return (
         <div className="App">
-            <FullInput
-                addMessage={addMessage}/>
+            <div>
+                <ButtonInput name={'++'} callBack={buttonHandler}/>
+                <Input title={title} setTitle={setTitle}/>
+            </div>
+
+            {/*<FullInput*/}
+            {/*    addMessage={addMessage}/>*/}
             {/*<div>*/}
             {/*    <input />*/}
             {/*    <button>+</button>*/}
