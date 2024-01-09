@@ -22,4 +22,3 @@ export const FullInput = (props: FullInputType) => {
     );
 };
 
-export default FullInput;
